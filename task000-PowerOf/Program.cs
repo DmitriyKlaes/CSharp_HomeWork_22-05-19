@@ -13,9 +13,9 @@ int PowerOf(int number, int power)
     }
     return result;
 }
-System.Console.WriteLine("Введите число: ");
+Console.WriteLine("Введите число: ");
 int number = Convert.ToInt32(Console.ReadLine());
-System.Console.WriteLine("Введите степень числа: ");
+Console.WriteLine("Введите степень числа: ");
 int power = Convert.ToInt32(Console.ReadLine());
 int result = PowerOf(number, power);
-System.Console.WriteLine($"{number}^{power} = {result}");
+Console.WriteLine($"{number}^{power} = {result}");
