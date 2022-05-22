@@ -4,6 +4,7 @@
 6, 1, 33 -> [6, 1, 33]
 */
 
+/*
 void FillArray(int[] array, string arg)
 {
     if (arg.ToLower() == "y")
@@ -39,6 +40,7 @@ void PrintArray(int[] array)
     }
     Console.Write("]");
 }
+
 int[] array = new int[8];
 Console.WriteLine("Выбрать случайные 8 чисел от 1 до 99 (ввелите Y или N)?: ");
 string choice = Console.ReadLine()!;
@@ -47,6 +49,60 @@ if (choice.ToLower() == "n" || choice.ToLower() == "y")
 {
     PrintArray(array);
 }
+*/
+void PrintArray(int[] array)
+{
+    Console.Write("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i]);
+        if (i < array.Length - 1)
+        {
+            Console.Write(", ");
+        }
+    }
+    Console.Write("]");
+}
+void DinArray(int[] array)
+{
+    try
+    {
+        for (int i = 0; i < array.Length + 1; i++)
+        {
+            Console.Write(new string(' ', Console.BufferWidth));
+            array[i] = Convert.ToInt32(Console.ReadLine());
+            Console.Clear();
+            string stringarray = string.Join(", ", array);
+            Console.WriteLine(stringarray);
+            Array.Resize(ref array, array.Length + 1);
+        }
+    }
+    catch
+    {
+        Array.Resize(ref array, array.Length - 1);
+    }
+}
+void RandomArray(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        array[i] = new Random().Next(1, 100);
+    }
+}
+//int[] array = new int[];
+System.Console.WriteLine("Введите размер массива (значение 0 задаст случайную размерность массива от 1 до 15): ");
+int length = Convert.ToInt32(Console.ReadLine());
+if (length == 0)
+{
+    int[] array = new int[length];
+}
+
+
+//PrintArray(array);
+
+/*
+string arraystring = string.Join(", ", array);
+System.Console.WriteLine(arraystring);*/
 /*
 else
 {
