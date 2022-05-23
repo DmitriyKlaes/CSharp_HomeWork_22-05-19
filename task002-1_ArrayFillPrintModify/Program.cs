@@ -4,54 +4,9 @@
 6, 1, 33 -> [6, 1, 33]
 */
 
-/*
-void FillArray(int[] array, string arg)
-{
-    if (arg.ToLower() == "y")
-    {
-        for (int i = 0; i < array.Length; i++)
-        {
-            array[i] = new Random().Next(1, 100);
-        }
-    }
-    else if (arg.ToLower() == "n")
-    {
-        Console.WriteLine("Введите 8 чисел через Enter: ");
-        for (int i = 0; i < array.Length; i++)
-        {
-            array[i] = Convert.ToInt32(Console.ReadLine());
-        }
-    }
-    else
-    {
-        Console.WriteLine("Неверный выбор, попробуйте ещё раз!");
-    }
-}
 void PrintArray(int[] array)
 {
-    Console.Write("[");
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write(array[i]);
-        if (i < array.Length - 1)
-        {
-            Console.Write(",");
-        }
-    }
-    Console.Write("]");
-}
-
-int[] array = new int[8];
-Console.WriteLine("Выбрать случайные 8 чисел от 1 до 99 (ввелите Y или N)?: ");
-string choice = Console.ReadLine()!;
-FillArray(array, choice);
-if (choice.ToLower() == "n" || choice.ToLower() == "y")
-{
-    PrintArray(array);
-}
-*/
-void PrintArray(int[] array)
-{
+    Console.WriteLine($"Массив из {array.Length} случайных элементов получился таким:");
     Console.Write("[");
     for (int i = 0; i < array.Length; i++)
     {
@@ -61,26 +16,29 @@ void PrintArray(int[] array)
             Console.Write(", ");
         }
     }
-    Console.Write("]");
+    Console.WriteLine("]");
 }
-void DinArray(int[] array)
+int[] DinArray()
 {
+    int[] array = new int[1];
+    Console.WriteLine($"Введите любое количество чисел (для завершения повторно нажмите Enter): \n[]");
     try
     {
         for (int i = 0; i < array.Length + 1; i++)
         {
-            Console.Write(new string(' ', Console.BufferWidth));
             array[i] = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
             string stringarray = string.Join(", ", array);
-            Console.WriteLine(stringarray);
+            Console.Write($"Введите любое количество чисел (для подтверждения повторно нажмите Enter): \n[{stringarray}] ");
             Array.Resize(ref array, array.Length + 1);
         }
     }
     catch
     {
         Array.Resize(ref array, array.Length - 1);
+        Console.WriteLine($"У вас получился массив из {array.Length} элементов!");
     }
+    return array;
 }
 void RandomArray(int[] array)
 {
@@ -89,49 +47,41 @@ void RandomArray(int[] array)
         array[i] = new Random().Next(1, 100);
     }
 }
-//int[] array = new int[];
-System.Console.WriteLine("Введите размер массива (значение 0 задаст случайную размерность массива от 1 до 15): ");
-int length = Convert.ToInt32(Console.ReadLine());
-if (length == 0)
+Console.Write("Желаете воспользоваться динамической системой наполнения массива? (Y / N): ");
+var input = Console.ReadKey();
+switch (input.Key)
 {
-    int[] array = new int[length];
-}
-
-
-//PrintArray(array);
-
-/*
-string arraystring = string.Join(", ", array);
-System.Console.WriteLine(arraystring);*/
-/*
-else
-{
-    return;
-}
-*/
-
-/*
-while (choice.ToLower() == "y")
-{
-    for (int i = 0; i < array.Length; i++)
+    case ConsoleKey.Y:
     {
-        array[i] = new Random().Next(1, 100);
+        Console.WriteLine();
+        int[] array = DinArray();
+        break;
     }
-    break;
-}
-while (choice.ToLower() == "n")
-{
-    Console.WriteLine("Введите 9 случайных чисел через (Пробел):");
-    string[] arrayNumber = (Console.ReadLine()!.Split(' '));
-    for (int i = 0; i < arrayNumber.Length; i++)
+    case ConsoleKey.N:
     {
-        array[i] = int.Parse(arrayNumber[i]);
+        Console.WriteLine();
+        Console.WriteLine("Новый массив будет заполнен случайными числами от 1 до 99!");
+        Console.WriteLine("Введите размер массива (значение 0 задаст случайный размер от 2 до 15 элементов):");
+        int length = Convert.ToInt32(Console.ReadLine());
+        if (length != 0)
+        {
+            int[] array = new int[length];
+            RandomArray(array);
+            PrintArray(array);
+        }
+        else
+        {
+            int randomLength = new Random().Next(2,16);
+            int[] array = new int[randomLength];
+            RandomArray(array);
+            PrintArray(array);
+        }
+        break;
     }
-    break;
+    default:
+    {
+        Console.WriteLine();
+        Console.WriteLine($"Неверный ввод, попробуйте еще раз!");
+        break;
+    }
 }
-int max = Max(Max(array[0], array[1], array[2]),
-              Max(array[3], array[4], array[5]),
-              Max(array[6], array[7], array[8]));
-string str = string.Join(", ", array);
-Console.WriteLine($"Максимальным из чисел ({str}) является {max}");
-*/
