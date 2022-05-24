@@ -4,8 +4,12 @@
 6, 1, 33 -> [6, 1, 33]
 */
 
+//Это модификация задачи №29 (task002). Предлагается выбор типа заполнения массива.
+//См. примечание в 54,55,56 строке.
+
 void PrintArray(int[] array)
 {
+    Console.WriteLine();
     Console.WriteLine($"Массив из {array.Length} случайных элементов получился таким:");
     Console.Write("[");
     for (int i = 0; i < array.Length; i++)
@@ -21,6 +25,7 @@ void PrintArray(int[] array)
 int[] DinArray()
 {
     int[] array = new int[1];
+    Console.WriteLine();
     Console.WriteLine($"Введите любое количество чисел (для завершения повторно нажмите Enter): \n[]");
     try
     {
@@ -40,15 +45,19 @@ int[] DinArray()
     }
     return array;
 }
-void RandomArray(int[] array)
+void RandomArray(int[] randomArray)
 {
-    for (int i = 0; i < array.Length; i++)
+    for (int i = 0; i < randomArray.Length; i++)
     {
-        array[i] = new Random().Next(1, 100);
+        randomArray[i] = new Random().Next(1, 100);
     }
 }
-Console.Write("Желаете воспользоваться динамической системой наполнения массива? (Y / N): ");
-var input = Console.ReadKey();
+Console.Write(@"Желаете воспользоваться динамической системой наполнения массива?
+Если не получается, попробуйте использовать клавиши Н(Y англ) или Т(N англ) из русской раскладки (Y / N): ");
+//Не знаю с чем связано, но иногда ConsoleKey считывает клавишу с русской раскладки, как английскую...
+//По этому если не получается сделать выбор путем нажатия Y или N, необходимо нажать Н и Т соответственно...
+//Об этом я написал в соответствующей строке с призывом к выбору действия.
+ConsoleKeyInfo input = Console.ReadKey();
 switch (input.Key)
 {
     case ConsoleKey.Y:
@@ -60,8 +69,9 @@ switch (input.Key)
     case ConsoleKey.N:
     {
         Console.WriteLine();
+        Console.WriteLine();
         Console.WriteLine("Новый массив будет заполнен случайными числами от 1 до 99!");
-        Console.WriteLine("Введите размер массива (значение 0 задаст случайный размер от 2 до 15 элементов):");
+        Console.Write("Введите размер массива (значение 0 задаст случайный размер от 2 до 15 элементов): ");
         int length = Convert.ToInt32(Console.ReadLine());
         if (length != 0)
         {
